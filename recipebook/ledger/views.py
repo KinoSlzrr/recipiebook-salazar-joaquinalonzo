@@ -85,10 +85,6 @@ class RecipeDetailView(DetailView):
 def index(request):
     return HttpResponse('Hello World!')
 
-def recipes_list(request):
-    ctx = master_context
-    return render(request, 'recipes_list.html', ctx)
-
 '''
     We use the same html file since the only thing that changes
     between the two different pages is the data
