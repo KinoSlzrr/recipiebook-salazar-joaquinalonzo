@@ -3,9 +3,11 @@ from django.views.generic.detail import DetailView
 
 from .models import Recipe
 
+
 class RecipeListView(ListView):
     model = Recipe
     template_name = 'home/recipes_list.html'
+
 
 class RecipeDetailView(DetailView):
     model = Recipe
