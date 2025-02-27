@@ -24,16 +24,16 @@ class RecipeIngredient(models.Model):
 
     ingredient = models.ForeignKey(
         Ingredient,
-        on_delete=models.SET_NULL,
+        on_delete= models.SET_NULL,
         null = True,
-        related_name = 'ingredients',
+        related_name = 'recipe',
     )
 
     recipe = models.ForeignKey(
         Recipe,
         on_delete = models.SET_NULL,
         null = True,
-        related_name = 'recipes',
+        related_name = 'ingredients',
     )
 
 

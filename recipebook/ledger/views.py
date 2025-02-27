@@ -12,6 +12,3 @@ class RecipeListView(ListView):
 class RecipeDetailView(DetailView):
     model = RecipeIngredient
     template_name = 'home/recipe_base.html'
-
-def index(request):
-    return HttpResponse('Hello World!')

@@ -4,7 +4,6 @@ from .views import index
 from .views import RecipeListView, RecipeDetailView
 
 urlpatterns = [
-    path('', index, name="index"),
     path('recipes/list', RecipeListView.as_view(), name="recipes-list"),
     path('recipe/<int:pk>', RecipeDetailView.as_view(), name="recipe-detail"),
 ]
