@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
-from .models import Recipe
+from .models import Recipe, RecipeIngredient
 
 '''
     We're using master_context so we can just pull from it 
@@ -77,6 +77,10 @@ master_context = {
 class RecipeListView(ListView):
     model = Recipe
     template_name = 'home/recipes_list.html'
+
+class RecipeDetailView(DetailView):
+    model = RecipeIngredient
+    template_name = 'home/recipe_base.html'
 
 def index(request):
     return HttpResponse('Hello World!')
