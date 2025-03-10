@@ -1,5 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Recipe
 
@@ -9,6 +10,7 @@ class RecipeListView(ListView):
     template_name = 'home/recipes_list.html'
 
 
-class RecipeDetailView(DetailView):
+class RecipeDetailView(LoginRequiredMixin, DetailView):
     model = Recipe
     template_name = 'home/recipe_base.html'
+    redirect_field_name = 'accounts/login'
