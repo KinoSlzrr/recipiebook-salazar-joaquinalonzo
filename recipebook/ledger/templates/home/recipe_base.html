@@ -6,8 +6,18 @@
     <ul>
         <h3>{{ object.name }}</h3>
 
-        {% for ingredient in object.ingredients.all %}
+        {% if request.user.is_authenticated %}
+        
+            <p>Author: {{ object.author }}</p>
+
+            {% for ingredient in object.ingredients.all %}
             <li>{{ ingredient.ingredient.name }} : {{ ingredient.quantity }}</li>
-        {% endfor %}
+            {% endfor %}
+
+        {% else %}
+
+            <p>Please login to view this page</p>
+
+        {% endif %}
     </ul>
 {% endblock %}
