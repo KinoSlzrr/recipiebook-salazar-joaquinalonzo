@@ -2,6 +2,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 from .models import Recipe, RecipeImage
 from .forms import RecipeForm, RecipeImageForm
@@ -30,3 +31,11 @@ class RecipeImageCreateView(CreateView):
     template_name = 'home/recipe_add_image.html'
     redirect_field_name = 'accounts/login'
     form_class = RecipeImageForm
+    success_url = 'ledger:recipe-detail'
+    
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['form'] = RecipeImageForm()
+        ctx['pk'] = self.kwargs['pk']
+        return ctx
+    

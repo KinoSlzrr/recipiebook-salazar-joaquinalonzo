@@ -3,9 +3,13 @@
 {% block title %}Add Recipe Image{% endblock %}
 
 {% block content %}
+    <p>PK: {{ pk }}</p>
+    
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Submit</button>
     </form>
+
+    <a href="{% url 'ledger:recipe-detail' pk=pk %}">Return to recipe</a>
 {% endblock %}
