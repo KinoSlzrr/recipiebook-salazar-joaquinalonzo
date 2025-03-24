@@ -20,19 +20,19 @@ class RecipeDetailView(LoginRequiredMixin, DetailView):
     redirect_field_name = 'accounts/login'
 
 
-class RecipeCreateView(CreateView):
+class RecipeCreateView(LoginRequiredMixin, CreateView):
     model = Recipe
     template_name = 'home/recipe_add.html'
     redirect_field_name = 'accounts/login'
     form_class = RecipeForm
 
 
-class RecipeImageCreateView(CreateView):
+class RecipeImageCreateView(LoginRequiredMixin, CreateView):
     model = RecipeImage
     template_name = 'home/recipe_add_image.html'
     redirect_field_name = 'accounts/login'
     form_class = RecipeImageForm
-    
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         pk = self.kwargs['pk']
@@ -40,7 +40,7 @@ class RecipeImageCreateView(CreateView):
         ctx['recipe'] = Recipe.objects.get(pk=pk)
         ctx['form'] = RecipeImageForm()
         return ctx
-    
+
     def post(self, request, *args, **kwargs):
         pk = self.kwargs['pk']
         form = RecipeImageForm(request.POST, request.FILES)

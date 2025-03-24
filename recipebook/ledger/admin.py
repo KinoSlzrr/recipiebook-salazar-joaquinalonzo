@@ -14,7 +14,7 @@ class RecipeIngredientInLine(admin.TabularInline):
 class RecipeIngredientAdmin(admin.ModelAdmin):
     model = RecipeIngredient
     inlines = [
-        RecipeIngredientInLine, 
+        RecipeIngredientInLine,
         RecipeImageInLine
     ]
 
