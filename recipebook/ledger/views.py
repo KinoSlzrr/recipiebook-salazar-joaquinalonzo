@@ -48,6 +48,7 @@ class RecipeImageCreateView(LoginRequiredMixin, CreateView):
         if form.is_valid():
             r = RecipeImage()
             r.image = request.FILES.get('image')
+            r.description = request.POST.get('description')
             r.recipe = Recipe.objects.get(pk=pk)
 
             r.save()
