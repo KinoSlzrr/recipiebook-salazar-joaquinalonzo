@@ -1,10 +1,10 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Recipe
-from .forms import RecipeForm
+from .models import Recipe, RecipeImage
+from .forms import RecipeForm, RecipeImageForm
 
 
 class RecipeListView(ListView):
@@ -18,15 +18,15 @@ class RecipeDetailView(LoginRequiredMixin, DetailView):
     redirect_field_name = 'accounts/login'
 
 
-class RecipeUpdateView(UpdateView):
-    model = Recipe
-    template_name = 'home/recipe_add.html'
-    redirect_field_name = 'accounts/login'
-    form_class = RecipeForm
-
-
 class RecipeCreateView(CreateView):
     model = Recipe
     template_name = 'home/recipe_add.html'
     redirect_field_name = 'accounts/login'
     form_class = RecipeForm
+
+
+class RecipeImageCreateView(CreateView):
+    model = RecipeImage
+    template_name = 'home/recipe_add_image.html'
+    redirect_field_name = 'accounts/login'
+    form_class = RecipeImageForm
