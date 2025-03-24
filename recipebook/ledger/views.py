@@ -34,8 +34,8 @@ class RecipeImageCreateView(CreateView):
     form_class = RecipeImageForm
     
     def get_context_data(self, **kwargs):
-        pk = self.kwargs['pk']
         ctx = super().get_context_data(**kwargs)
+        pk = self.kwargs['pk']
         ctx['pk'] = pk
         ctx['recipe'] = Recipe.objects.get(pk=pk)
         ctx['form'] = RecipeImageForm()
@@ -51,9 +51,9 @@ class RecipeImageCreateView(CreateView):
             r.recipe = Recipe.objects.get(pk=pk)
 
             r.save()
-            return redirect(reverse('ledger:recipe-detail'), args=[pk])
+            return redirect(reverse('ledger:recipe-detail', args=[pk]))
         else:
-            self.object_list = self.get_queryset()
+            self.object_list = self.get_queryset(**kwargs)
             context = self.get_context_data(**kwargs)
             context['form'] = form
             return self.render_to_response(context)
