@@ -20,13 +20,13 @@ class RecipeDetailView(LoginRequiredMixin, DetailView):
 
 class RecipeUpdateView(UpdateView):
     model = Recipe
-    template_name = 'home/recipe_detail.html'
+    template_name = 'home/recipe_add.html'
     redirect_field_name = 'accounts/login'
     form_class = RecipeForm
 
 
 class RecipeCreateView(CreateView):
     model = Recipe
-    template_name = 'home/recipe_detail.html'
+    template_name = 'home/recipe_add.html'
     redirect_field_name = 'accounts/login'
     form_class = RecipeForm
