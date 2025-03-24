@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ object.name }}{% endblock %}
 
@@ -7,6 +8,10 @@
         <h3>{{ object.name }}</h3>
 
         <p>Author: {{ object.author }}</p>
+
+        {% for image in object.recipe_image.all %}
+            <img src="{{ image.image.url }}" alt="{{ image.description }}">
+        {% endfor %}
 
         {% for ingredient in object.ingredients.all %}
         <li>{{ ingredient.ingredient.name }} : {{ ingredient.quantity }}</li>
