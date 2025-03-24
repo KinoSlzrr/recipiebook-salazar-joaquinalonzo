@@ -2,7 +2,8 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse
+from django.shortcuts import redirect
 
 from .models import Recipe, RecipeImage
 from .forms import RecipeForm, RecipeImageForm
@@ -31,11 +32,28 @@ class RecipeImageCreateView(CreateView):
     template_name = 'home/recipe_add_image.html'
     redirect_field_name = 'accounts/login'
     form_class = RecipeImageForm
-    success_url = 'ledger:recipe-detail'
     
     def get_context_data(self, **kwargs):
+        pk = self.kwargs['pk']
         ctx = super().get_context_data(**kwargs)
+        ctx['pk'] = pk
+        ctx['recipe'] = Recipe.objects.get(pk=pk)
         ctx['form'] = RecipeImageForm()
-        ctx['pk'] = self.kwargs['pk']
         return ctx
     
+    def post(self, request, *args, **kwargs):
+        pk = self.kwargs['pk']
+        form = RecipeImageForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            r = RecipeImage()
+            r.image = request.FILES.get('image')
+            r.recipe = Recipe.objects.get(pk=pk)
+
+            r.save()
+            return redirect(reverse('ledger:recipe-detail'), args=[pk])
+        else:
+            self.object_list = self.get_queryset()
+            context = self.get_context_data(**kwargs)
+            context['form'] = form
+            return self.render_to_response(context)

@@ -24,8 +24,7 @@ class Recipe(models.Model):
     def get_absolute_url(self):
         return reverse(
             'ledger:recipe-detail',
-            args=[self.pk],
-            kwargs={"pk": self.pk}
+            args=[self.pk]
         )
 
 
